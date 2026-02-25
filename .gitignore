@@ -1,6 +1,9 @@
 # Technical documentation website mirror
 technical-docs/ireal-pro-custom-chord-chart-protocol*
 
+# IReal Pro playlist directory
+playlists
+
 # Default virtual environment
 env
 

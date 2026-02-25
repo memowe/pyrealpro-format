@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools >= 64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyrealpro-format"
+version = "0.1.0"
+description = "Modern reference implementation of the iReap Pro lead sheet format"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+authors = [
+    { name = "Mirko Westermeier", email = "mirko@westermeier.de" },
+]
+dependencies = [
+    "parsel",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy",
+    "pyright",
+    "black",
+    "pytest",
+    "hypothesis",
+    "pdoc",
+]
+
+[project.urls]
+Homepage = "https://github.com/memowe/pyrealpro-format"
+Repository = "https://github.com/memowe/pyrealpro-format"
+Issues = "https://github.com/memowe/pyrealpro-format/issues"
+
+[tool.setuptools.packages.find]
+include = ["pyrealpro_format*"]
+
+[tool.setuptools.package-data]
+pyrealpro_format = ["py.typed"]
+
+[tool.mypy]
+strict = true
