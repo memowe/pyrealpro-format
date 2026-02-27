@@ -8,12 +8,13 @@ VENV_PIP := $(VENV)/bin/pip
 DEPS_SENTINEL := $(VENV)/.deps-installed
 PYPROJECT := pyproject.toml
 SOURCE_FOLDERS := pyrealpro_format test utils
+API_DOCS_FOLDER := .api_docs
 
 IREAL_PRO_PLAYLISTS := https://www.irealpro.com/main-playlists/
 IREAL_PRO_PLAYLISTS_DIR := playlists
 
 .PHONY: all
-all: check test
+all: check test docs
 
 .PHONY: check
 check: install_deps
@@ -45,9 +46,15 @@ $(IREAL_PRO_PLAYLISTS_DIR): install_deps
 		--url $(IREAL_PRO_PLAYLISTS) \
 		--output $(IREAL_PRO_PLAYLISTS_DIR)
 
+.PHONY: docs
+docs: install_deps
+	mkdir -p $(API_DOCS_FOLDER)
+	$(VENV_PY) -m pdoc -o $(API_DOCS_FOLDER) pyrealpro_format
+
 .PHONY: clean
 clean:
 	rm -rf $(VENV)
 	rm -rf $(IREAL_PRO_PLAYLISTS_DIR)
+	rm -rf $(API_DOCS_FOLDER)
 	find . -type d -name __pycache__ -exec rm -rf {} +
 	rm -rf .mypy_cache .pytest_cache

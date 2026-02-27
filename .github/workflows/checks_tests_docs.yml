@@ -1,0 +1,42 @@
+name: pyrealpro-format checks, tests and docs
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  checks_and_tests_and_docs:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: make check
+      - run: make test
+
+  pages:
+    needs: checks_and_tests_and_docs
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: make docs
+      - run: tree .api_docs
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .api_docs
+      - id: deploy
+        uses: actions/deploy-pages@v4
