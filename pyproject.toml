@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pyrealpro-format"
 version = "0.1.0"
-description = "Modern reference implementation of the iReap Pro lead sheet format"
+description = "Modern reference implementation of the iReal Pro lead sheet format"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.12"

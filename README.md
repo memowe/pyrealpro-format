@@ -1,6 +1,6 @@
 # pyrealpro-format
 
-Modern reference implementation of the iReap Pro lead sheet format.
+Modern reference implementation of the iReal Pro lead sheet format.
 
 ## Semi-formal technical documentation
 
